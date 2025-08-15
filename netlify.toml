@@ -1,6 +1,6 @@
 [build]
-  functions = "netlify/functions" # Onde suas funções serverless estarão
-  publish = "." # Onde seus arquivos HTML/CSS/JS estão (diretório raiz)
+  functions = "netlify/functions" # O Netlify vai procurar suas funções aqui
+  publish = "." # O Netlify vai publicar os arquivos da pasta raiz (onde está o index.html)
 
 [functions]
-  node_bundler = "esbuild" # Bundler recomendado para Node.js functions
+  node_bundler = "esbuild" # Ferramenta para otimizar suas funções Node.js
