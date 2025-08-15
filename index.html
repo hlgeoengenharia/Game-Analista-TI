@@ -1032,7 +1032,7 @@
                                     <p><strong>Gemini:</strong> É uma família de modelos de IA multimodal desenvolvida pelo Google, capaz de compreender e operar com texto, código, áudio, imagem e vídeo. No TJPE, o Gemini pode ter aplicações avançadas, como a análise de documentos digitalizados (texto e imagem), a transcrição e sumarização de audiências (áudio) e a geração de conteúdo multimídia para treinamento ou comunicação, oferecendo uma capacidade de IA mais abrangente.</p>
                                     <p><strong>Llama:</strong> (Large Language Model Meta AI) É uma família de LLMs de código aberto desenvolvida pela Meta (Facebook). Modelos como Llama 2 podem ser executados localmente ou em infraestruturas privadas. No TJPE, o Llama pode ser uma opção para desenvolver soluções de IA generativa com maior controle sobre os dados e a segurança, ideal para ambientes que exigem conformidade rigorosa e privacidade, permitindo personalização e ajuste fino para tarefas jurídicas específicas.</p>
                                     <p><strong>Ollama:</strong> É uma ferramenta que permite executar modelos de linguagem grandes (LLMs) localmente em seu computador. Simplifica o processo de download e execução de modelos como Llama. No TJPE, Ollama pode ser útil para equipes de pesquisa e desenvolvimento que desejam experimentar com LLMs de código aberto em um ambiente controlado e sem custos de nuvem, facilitando a prototipagem e a avaliação de modelos para uso interno.</p>
-                                    <p><strong>Deepseek:</strong> É uma empresa de IA que desenvolve modelos de linguagem e outras soluções de IA, incluindo modelos de código aberto. No TJPE, modelos da Deepseek podem ser avaliados para tarefas específicas de processamento de texto ou geração de código, dependendo de suas capacidades e licenças, oferecendo mais opções para a implementação de soluções de IA.</p>
+                                    <p><strong>Deepseek:</strong> É uma empresa de IA que desenvolve modelos de linguagem e outras soluções de IA, incluindo modelos de código aberto. No TJPE, modelos da Deepseek podem ser avaliados para tarefas específicas de processamento de texto ou geração de código, dependendo de suas capacidades e licenças, oferecendo mais opções para la implementação de soluções de IA.</p>
                                 `
                             },
                             {
@@ -1121,7 +1121,7 @@
                                     <p><strong>SQL Injection:</strong> É uma vulnerabilidade de segurança que permite a um atacante interferir nas consultas que uma aplicação faz ao seu banco de dados. No TJPE, um SQL Injection bem-sucedido poderia permitir que um atacante visualize, modifique ou exclua dados de processos, ou até mesmo obtenha acesso não autorizado ao sistema, comprometendo a integridade e a confidencialidade das informações judiciais.</p>
                                     <p><strong>XSS:</strong> (Cross-Site Scripting) É uma vulnerabilidade que permite a um atacante injetar scripts maliciosos (geralmente JavaScript) em páginas web visualizadas por outros usuários. No TJPE, um ataque XSS poderia ser usado para roubar sessões de usuários (magistrados, advogados), redirecionar usuários para sites falsos ou desfigurar páginas do portal, comprometendo a confiança e a segurança dos usuários.</p>
                                     <p><strong>CSRF:</strong> (Cross-Site Request Forgery) É um tipo de ataque que força um usuário autenticado a enviar uma requisição forjada para um servidor web. No TJPE, um ataque CSRF poderia levar um usuário logado a realizar ações indesejadas, como alterar dados de um processo, transferir fundos (se aplicável a sistemas financeiros internos) ou mudar senhas, sem seu conhecimento ou consentimento, explorando a confiança que o navegador tem no usuário autenticado.</p>
-                                    <p><strong>Broken Authentication:</strong> Refere-se a falhas na implementação de funções de autenticação ou gerenciamento de sessões que permitem a um atacante comprometer senhas, chaves de sessão ou tokens de autenticação, ou explorar falhas na lógica de autenticação. No TJPE, vulnerabilidades de autenticação quebrada podem levar ao acesso não autorizado a sistemas e dados confidenciais, permitindo que atacantes se passem por usuários legítimos (magistrados, servidores) e executem ações indevidas.</p>
+                                    <p><strong>Broken Authentication:</strong> Refere-se a falhas na implementação de funções de autenticação ou gerenciamento de sessões que permitem a um atacante comprometer senhas, chaves de sessão ou tokens de autenticação, ou explorar falhas na lógica de autenticação. No TJPE, vulnerabilidades de autenticação quebrada podem levar ao acesso não autorizado a sistemas e dados confidenciais, permitindo que atacantes se passem por usuários legítimos (magistrados, servidores) e executem ações indesevedas.</p>
                                     <p><strong>Práticas seguras de desenvolvimento (DevSecOps):</strong> DevSecOps é a integração da segurança em todas as fases do ciclo de vida de desenvolvimento de software (SDLC), desde o design até a implantação e operação. No TJPE, adotar DevSecOps significa que a segurança não é um "pensamento posterior", mas uma preocupação contínua, com ferramentas automatizadas de análise de código, testes de segurança e monitoramento contínuo. Isso garante que os sistemas judiciais sejam construídos com segurança desde o início, reduzindo vulnerabilidades e protegendo os dados sensíveis de forma mais eficaz.</p>
                                 `
                             },
@@ -1480,7 +1480,7 @@ Formato da saída esperada (JSON):
 `;
 
                     try {
-                        // Payload para a API Gemini
+                        // Payload para a API Gemini (diretamente, sem proxy aqui no Canvas)
                         const payload = {
                             contents: [{ role: "user", parts: [{ text: prompt }] }],
                             generationConfig: {
@@ -1509,7 +1509,8 @@ Formato da saída esperada (JSON):
                             }
                         };
 
-                        const apiKey = ""; // A API Key será fornecida automaticamente pelo ambiente Canvas
+                        // URL DIRETA da API Gemini para uso no Canvas
+                        const apiKey = ""; // A API Key é injetada automaticamente pelo Canvas
                         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                         let retries = 0;
@@ -1522,7 +1523,7 @@ Formato da saída esperada (JSON):
                                 const response = await fetch(apiUrl, {
                                     method: 'POST',
                                     headers: { 'Content-Type': 'application/json' },
-                                    body: JSON.stringify(payload)
+                                    body: JSON.stringify(payload) // Envia o payload direto para a API Gemini
                                 });
 
                                 if (!response.ok) {
@@ -1539,7 +1540,7 @@ Formato da saída esperada (JSON):
                                 result = await response.json();
                                 break; // Sai do loop se a requisição for bem-sucedida
                             } catch (error) {
-                                console.error("Erro ao buscar da API Gemini:", error);
+                                console.error("Erro ao buscar da API Gemini (questões):", error);
                                 retries++;
                                 if (retries < maxRetries) {
                                     console.warn(`Tentando novamente em ${delay / 1000}s...`);
@@ -1552,10 +1553,10 @@ Formato da saída esperada (JSON):
                         }
 
                         if (!result) {
-                            throw new Error("Falha ao obter resposta da API Gemini após múltiplas tentativas.");
+                            throw new Error("Falha ao obter resposta da API Gemini (questões) após múltiplas tentativas.");
                         }
 
-                        // Verifica a estrutura da resposta
+                        // Verifica a estrutura da resposta da API Gemini
                         if (result.candidates && result.candidates.length > 0 &&
                             result.candidates[0].content && result.candidates[0].content.parts &&
                             result.candidates[0].content.parts.length > 0) {
@@ -1676,6 +1677,7 @@ Formato da saída esperada (JSON):
 }
 `;
                     try {
+                        // Payload para a API Gemini (diretamente, sem proxy aqui no Canvas)
                         const payload = {
                             contents: [{ role: "user", parts: [{ text: promptTema }] }],
                             generationConfig: {
@@ -1696,7 +1698,8 @@ Formato da saída esperada (JSON):
                             }
                         };
 
-                        const apiKey = "";
+                        // URL DIRETA da API Gemini para uso no Canvas
+                        const apiKey = ""; // A API Key é injetada automaticamente pelo Canvas
                         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                         let retries = 0;
@@ -1784,14 +1787,16 @@ Formato da saída esperada (JSON):
 - Foque na aplicação prática no TJPE e na linguagem formal de um concurso.
 `;
                     try {
+                        // Payload para a API Gemini (diretamente, sem proxy aqui no Canvas)
                         const payload = {
                             contents: [{ role: "user", parts: [{ text: promptEspelho }] }],
                             generationConfig: {
-                                responseMimeType: "text/plain" // Esperamos texto puro
+                                responseMimeType: "text/plain"
                             }
                         };
 
-                        const apiKey = "";
+                        // URL DIRETA da API Gemini para uso no Canvas
+                        const apiKey = ""; // A API Key é injetada automaticamente pelo Canvas
                         const apiUrl = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-05-20:generateContent?key=${apiKey}`;
 
                         let retries = 0;
